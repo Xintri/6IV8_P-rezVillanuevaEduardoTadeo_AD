@@ -1,4 +1,5 @@
 import pandas as pd
+import matplotlib.pyplot as plt
 
 df = pd.read_csv('./ElementosBasicosEstaduscutca/housing.csv')
 
@@ -32,3 +33,13 @@ print("El salario total es de: " + str(salarioTotal))
 ##Filtrar
 vamoshacerfiltro = df[df["ocean_proximity"] == "ISLAND"]
 print(vamoshacerfiltro)
+
+##Hacer grafico de dispersion
+
+plt.scatter(df["ocean_proximity"][:10], df["median_house_value"][:10])
+
+##Nombramos los ejes
+plt.xlabel("proximidad")
+plt.ylabel("precio")
+plt.title("Grafico de Dispersion de Proximidad al Oceano vs Precio")
+plt.show()
