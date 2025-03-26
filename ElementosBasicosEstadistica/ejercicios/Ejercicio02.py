@@ -24,6 +24,8 @@ print(f"Sin adeudo: {sin_adeudo} ({porc_sin:.2f}%)")
 
 # Gráfica de ventas totales vs. tiempo
 df_vt = df_proyecto.groupby('B_mes')['ventas_tot'].sum().reset_index()
+# Convertir a formato fecha sin la parte de la hora
+df_vt['B_mes'] = pd.to_datetime(df_vt['B_mes']).dt.strftime('%Y-%m-%d')
 x = range(len(df_vt))
 plt.bar(x, df_vt['ventas_tot'], color='#AEC6CF', width=0.6, edgecolor='black', linewidth=2)
 plt.xticks(x, df_vt['B_mes'], rotation=45)
@@ -33,8 +35,9 @@ plt.show()
 
 # Gráfica de desviación estándar de pagos vs. tiempo
 df_std = df_proyecto.groupby('B_mes')['pagos_tot'].std().reset_index()
+df_std['B_mes'] = pd.to_datetime(df_std['B_mes']).dt.strftime('%Y-%m-%d')
 x2 = range(len(df_std))
-plt.bar(x2, df_std['pagos_tot'], color='#FFB347', width=0.6, edgecolor='black', linewidth=2)
+plt.bar(x2, df_std['pagos_tot'], color='#854aa1', width=0.6, edgecolor='black', linewidth=2)
 plt.xticks(x2, df_std['B_mes'], rotation=45)
 plt.title("Desviación estándar de pagos")
 plt.tight_layout()
